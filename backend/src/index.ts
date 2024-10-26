@@ -10,6 +10,7 @@ import { v2 as cloudinary } from "cloudinary";
 import myHotelRoutes from "./routes/my-hotels";
 import hotelRoutes from "./routes/hotels";
 import bookingRoutes from "./routes/my-bookings";
+import job from "./cron/cron";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -20,6 +21,8 @@ cloudinary.config({
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
 
 const app = express();
+job.start();
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,6 +34,7 @@ app.use(
 );
 
 app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
