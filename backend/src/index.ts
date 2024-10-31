@@ -28,7 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin:"https://mern-booking-website-x63e.onrender.com",
+    origin:"https://booking-he3w.onrender.com",
     credentials: true,
   })
 );
